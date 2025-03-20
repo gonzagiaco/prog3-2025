@@ -1,8 +1,9 @@
+import java.util.Iterator;
 
-
-public class MySimpleLinkedList<T> {
+public class MySimpleLinkedList<T> implements Iterable<T>{
 	
 	private Node<T> first;
+	private int size;
 	
 	public MySimpleLinkedList() {
 		this.first = null;
@@ -12,32 +13,101 @@ public class MySimpleLinkedList<T> {
 		Node<T> tmp = new Node<T>(info,null);
 		tmp.setNext(this.first);
 		this.first = tmp;
+		size++;
 	}
 	
 	public T extractFront() {		
-		// TODO
-		return null;
+		T tmp = this.first.getInfo();
+		this.first = this.first.getNext();
+		size--;
+		return tmp;
 	}
 
 	public boolean isEmpty() {
-		// TODO
-		return false;
+		return this.first==null;
 	}
-	
+
+
 	public T get(int index) {
-		// TODO
-		return null;
+		T info = null;
+		int pos = 0;
+
+		if(this.first == null){
+			return null;
+		}
+
+		Node<T> firstNode = this.first; // Se mantiene la referencia original para no perder el primer nodo
+		while (pos < index && index <= size) {
+			firstNode = firstNode.getNext();
+			pos++;
+		}
+
+
+		if(pos == index){
+			info = this.first.getInfo();
+		}
+
+		return info;
 	}
-	
+
+	public int indexOf(T element){
+		//reciba un elemento y retorne el índice donde está almacenado ese
+		//elemento, o -1 si el elemento no existe en la lista
+		Node<T>currentNode = this.first;
+		int pos = 0;
+		while (currentNode!=null){
+			if (currentNode.getInfo().equals(element)){
+				return pos;
+			}
+
+			currentNode = currentNode.getNext();
+			pos++;
+		}
+		return -1;
+	}
+
+	public MySimpleLinkedList<T> buildList(MySimpleLinkedList<T> l1, MySimpleLinkedList<T> l2) {
+		MySimpleLinkedList<T> listaEnComun = new MySimpleLinkedList<>();
+		Node<T> NodoA = l1.first;
+
+		while (NodoA != null) {
+			boolean encontro = false;
+			Node<T> NodoB = l2.first;
+
+			while (NodoB != null) {
+				if (NodoA.getInfo().equals(NodoB.getInfo())) {
+					listaEnComun.insertFront(NodoA.getInfo());
+					encontro = true;
+				}
+				NodoB = NodoB.getNext();
+			}
+
+			NodoA = NodoA.getNext();
+		}
+
+		return listaEnComun;
+	}
+
+
 	public int size() {
-		// TODO
-		return 0;
+		return this.size;
 	}
 	
 	@Override
 	public String toString() {
-		// TODO
-		return "";
+		String result = "";
+		while(this.first != null){
+			result += this.first.getInfo();
+			this.first = this.first.getNext();
+		}
+
+		return result;
 	}
+
+	@Override
+	public Iterator<T> iterator() {
+		return new MyIterator<>(this.first);
+	}
+
 	
 }

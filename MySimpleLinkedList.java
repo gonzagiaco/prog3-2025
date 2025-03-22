@@ -1,10 +1,18 @@
 import java.util.Iterator;
 
-public class MySimpleLinkedList<T> implements Iterable<T>{
+public class MySimpleLinkedList<T extends Comparable<T>> implements Iterable<T> {
 	
 	private Node<T> first;
 	private int size;
-	
+
+	public Node<T> getFirst() {
+		return first;
+	}
+
+	public void setFirst(Node<T> first) {
+		this.first = first;
+	}
+
 	public MySimpleLinkedList() {
 		this.first = null;
 	}
@@ -71,13 +79,11 @@ public class MySimpleLinkedList<T> implements Iterable<T>{
 		Node<T> NodoA = l1.first;
 
 		while (NodoA != null) {
-			boolean encontro = false;
 			Node<T> NodoB = l2.first;
 
 			while (NodoB != null) {
 				if (NodoA.getInfo().equals(NodoB.getInfo())) {
 					listaEnComun.insertFront(NodoA.getInfo());
-					encontro = true;
 				}
 				NodoB = NodoB.getNext();
 			}
@@ -87,7 +93,6 @@ public class MySimpleLinkedList<T> implements Iterable<T>{
 
 		return listaEnComun;
 	}
-
 
 	public int size() {
 		return this.size;

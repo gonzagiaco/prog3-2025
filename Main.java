@@ -2,6 +2,25 @@ public class Main {
 
     public static void main(String[] args) {
 
+        // Lista simplemente enlazada
+        MySimpleLinkedList<Integer> listaSimple = new MySimpleLinkedList<>();
+        System.out.println("Insertando en lista simplemente enlazada:");
+        listaSimple.insertFront(5);
+        listaSimple.insertFront(10);
+        listaSimple.insertFront(15);
+        System.out.println("Lista simple después de insertFront: " + listaSimple);
+
+        // Lista doblemente enlazada
+        MySimpleLinkedList<Integer> listaDoble = new MySimpleLinkedList<>();
+        listaDoble.setDoubly(true);
+        System.out.println("\nInsertando en lista doblemente enlazada:");
+        listaDoble.insertFront(20);
+        listaDoble.insertFront(25);
+        listaDoble.insertFront(30);
+        System.out.println("Lista doble después de insertFront: " + listaDoble);
+
+
+/*
         MySimpleLinkedList<Integer> listaA = new MySimpleLinkedList<Integer>();
         MySimpleLinkedList<Integer> listaB = new MySimpleLinkedList<Integer>();
 
@@ -38,7 +57,7 @@ public class Main {
             System.out.println(l);
         }
 
-        /*con otra clase*/
+        ///con otra clase//
 
         // Crear dos listas desordenadas
         MySimpleLinkedList<Integer> lista1 = new MySimpleLinkedList<>();
@@ -91,6 +110,7 @@ public class Main {
             System.out.println(valor);
         }
 
+*/
 
 
 

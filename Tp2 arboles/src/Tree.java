@@ -10,9 +10,14 @@ void printPosOrder(), void printPreOrder(), void printInOrder(),
 List getLongestBranch(), List getFrontera(), Integer getMaxElem(),
 List getElemAtLevel(int)
 1. ¿Cuál es la complejidad de cada uno de estos métodos?
+
+
+
+Ejercicio 2
+Dado un árbol binario de búsquedas que almacena números enteros, implementar un algoritmo
+que retorne la suma de todos los nodos internos del árbol.
 * */
 
-import java.sql.Array;
 import java.util.ArrayList;
 
 public class Tree {
@@ -35,6 +40,121 @@ public class Tree {
         int altura = 0;
         return getHeight(this.root, altura);
 
+    }
+
+    public ArrayList<Integer> getElemAtLevel(int level){
+        ArrayList<Integer> elementos = new ArrayList<>();
+        if(this.root == null){
+            return new ArrayList<Integer>();
+        }
+
+        return getElemAtLevel(this.root, level, elementos);
+    }
+
+    private ArrayList<Integer>getElemAtLevel(TreeNode actual, int level, ArrayList<Integer> result){
+
+        if (actual == null){
+            return result;
+        }
+
+        if(level == 0){
+            result.add(actual.getValue());
+            return result;
+        }
+
+
+        getElemAtLevel(actual.getLeft(),level-1, result);
+        getElemAtLevel(actual.getRight(),level-1, result);
+
+        return result;
+
+    }
+
+    public TreeNode delete(Integer num){
+        if(this.root == null){
+            return null;
+        }
+
+        return delete(this.root, num);
+    }
+/*
+    private boolean delete(TreeNode actual, Integer num){
+
+        if (actual == null){
+            return false;
+        }
+
+        if (num < actual.getValue()){
+            boolean deleted = delete(actual.getLeft(),num);
+
+            if (deleted && actual.getLeft() != null){
+                actual.setLeft(null);
+            }
+
+        }
+
+
+
+        return false;
+    }
+
+
+ */
+
+    private TreeNode delete(TreeNode actual, Integer num){
+
+        if(actual == null){
+            return null;
+        }
+
+        if(num < actual.getValue()){
+            actual.setLeft(delete(actual.getLeft(), num));
+        }else if (num > actual.getValue()){
+            actual.setRight(delete(actual.getRight(), num));
+        }else{
+
+            if(actual.getLeft() == null && actual.getRight() == null){ //Primer caso
+                return null;
+            }
+
+            else if(actual.getLeft() == null){ //segundo caso
+                return actual.getRight();
+            }
+            else if (actual.getRight() == null){
+                return actual.getLeft();
+            }
+
+            else{
+                TreeNode tmp = NodoMasIzquierdo(actual.getRight());
+                actual.setValue(tmp.getValue());
+                actual.setRight(delete(tmp, actual.getValue()));
+                return actual;
+            }
+        }
+
+        return actual;
+    }
+
+    public TreeNode NodoMasIzquierdo(TreeNode nodo) {
+        if (nodo == null) return null;
+        if (nodo.getLeft() == null) return nodo; // Si no hay izquierda, este es el más izquierdo
+        return NodoMasIzquierdo(nodo.getLeft());
+    }
+
+    public Integer getMaxElem(){
+        if(this.root == null){
+            return -1;
+        }
+        return getMaxElem(this.root);
+    }
+
+    public Integer getMaxElem(TreeNode actual){
+
+        if(actual.getRight() == null){
+            return actual.getValue();
+        }
+
+        return getMaxElem(actual.getRight());
     }
 
     private int getHeight(TreeNode inicio, int altura){
@@ -166,6 +286,145 @@ public class Tree {
                 add(actual.getRight(),value);
             }
         }
+    }
+
+    public void imprimirPreOrden(){
+        imprimirPreOrden(this.root);
+    }
+
+    private void imprimirPreOrden(TreeNode nodo)
+    {
+        if (nodo == null)
+            return;
+        System.out.print(nodo.getValue() + " ");
+        imprimirPreOrden(nodo.getLeft());
+        imprimirPreOrden(nodo.getRight());
+    }
+
+    public void imprimirPosOrden(){
+        imprimirPosOrden(this.root);
+    }
+
+    private void imprimirPosOrden(TreeNode nodo)
+    {
+        if (nodo == null)
+            return;
+        imprimirPosOrden(nodo.getLeft());
+        imprimirPosOrden(nodo.getRight());
+        System.out.print(nodo.getValue() + " ");
+    }
+
+    public void imprimirEnOrden(){
+        imprimirEnOrden(this.root);
+    }
+
+    private void imprimirEnOrden(TreeNode nodo)
+    {
+        if (nodo == null)
+            return;
+        imprimirEnOrden(nodo.getLeft());
+        System.out.print(nodo.getValue() + " ");
+        imprimirEnOrden(nodo.getRight());
+    }
+
+    public int getSumatoria(){
+        if(this.root == null){
+            return -1;
+        }
+        return getSumatoria(this.root);
+
+    }
+
+    private int getSumatoria(TreeNode actual){
+        if(actual == null){
+            return 0;
+        }
+
+        int sumIzq = getSumatoria(actual.getLeft());
+        int sumDer = getSumatoria(actual.getRight());
+
+        int total = actual.getValue() + sumIzq + sumDer;
+
+        return total;
+    }
+
+
+    // no se pregunta si el valor es mayor o menor a raiz
+    //Llegamos a la hoja
+    //if hoja.getValue() > K , lista.add(hoja.getValue());
+
+    public ArrayList<Integer> ejercicio3(int k){
+        ArrayList<Integer> resultado = new ArrayList<>();
+        if(this.root == null){
+            return new ArrayList<Integer>();
+        }
+
+        return ejercicio3(this.root, k, resultado);
+    }
+
+    private ArrayList<Integer> ejercicio3(TreeNode actual, int k, ArrayList<Integer> resultado){
+        if(actual == null){
+            return null;
+        }
+
+        if(actual.getLeft() == null && actual.getRight() == null){
+            if(actual.getValue() > k){
+                resultado.add(actual.getValue());
+            }
+        }
+
+        // Recorremos ambos lados, sin cortar el flujo
+        ejercicio3(actual.getLeft(), k, resultado);
+        ejercicio3(actual.getRight(), k, resultado);
+
+        return resultado;
+    }
+
+    //if(actual.hijo == null, actual.hijo = 0);
+    //actual = actual.getRight() - actual.getLeft();
+
+    //if(actual.getLeft() == null ? 0 : actual.getLeft().getValue();
+    //if(actual.getRight() == null ? 0 : actual.getRight().getValue();
+
+    public void ejercicio4(){
+        ejercicio4(this.root);
+    }
+
+    private int ejercicio4(TreeNode nodo){
+        if (nodo == null) {
+            return 0;
+        }
+
+        if (nodo.getLeft() == null && nodo.getRight() == null) {
+            return nodo.getValue(); // hoja
+        }
+
+        int valorIzquierdo = ejercicio4(nodo.getLeft());
+        int valorDerecho = ejercicio4(nodo.getRight());
+
+        nodo.setValue(valorDerecho - valorIzquierdo);
+
+        return nodo.getValue();
+    }
+
+
+    private void ejercicio44(TreeNode actual){
+        if(actual == null){
+            return;
+        }
+
+        ejercicio4(actual.getLeft());
+        ejercicio4(actual.getRight());
+
+        //if (actual.getLeft() == null && actual.getRight() == null) return;
+
+        if(actual.getValue() == null){
+            int valorIzq = actual.getLeft() == null ? 0 : actual.getLeft().getValue();
+            int valorDer = actual.getRight() == null ? 0 : actual.getRight().getValue();
+
+            actual.setValue(valorDer - valorIzq);
+        }
+
     }
 
 }

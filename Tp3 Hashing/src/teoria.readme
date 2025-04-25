@@ -1,0 +1,8 @@
+
+
+HashMap<String, Student>: para almacenar los clientes con su DNI como clave. Permite obtener rápidamente información individual como el saldo,
+ cumpliendo eficientemente con el requerimiento (a).
+
+List<Student>: se utilizó para recorrer todos los clientes al momento de aplicar filtros, como aquellos con saldo menor a X
+o que pertenezcan a una ciudad específica (requerimientos b y c).
+

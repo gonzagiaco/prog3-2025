@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class Main {
         System.out.println(cliente.containsValue("Luciano"));
         */
     try{
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    /*    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate fecha1 = LocalDate.parse("19/05/1997", formatter);
         LocalDate fecha2 = LocalDate.parse("29/12/1999", formatter);
         LocalDate fecha3 = LocalDate.parse("29/12/1999", formatter);
@@ -95,11 +96,65 @@ public class Main {
             }
         }
 
+        */
 
 
     }catch (Exception exc){
         System.out.println(exc);
     }
+
+
+        Biblioteca b1 = new Biblioteca(1,"La cabra vol.1","DjLulox","Sexo",1997,2);
+        Biblioteca b2 = new Biblioteca(2,"50 sombras de mica", "Mica","Romance",2020,5);
+        Biblioteca b3 = new Biblioteca(3,"obra y vida de los downs","ElTomiii","Psicologia",1957,20);
+        Biblioteca b4 = new Biblioteca(3,"freud y los gays","freud","Psicologia",2009,5);
+        Biblioteca b5 = new Biblioteca(3,"el psicoanalisis del el tomiii","ElTomiii","Psicologia",2000,10);
+
+
+        HashMap<Integer,Biblioteca> libros = new HashMap<>();
+
+        libros.put(b1.getId(),b1);
+        libros.put(b1.getId(),b2);
+        libros.put(b1.getId(),b3);
+
+        //Obtener la cantidad de ejemplares de un libro dado su identificador único.
+
+        System.out.println("Ejercicio 4-A");
+        Integer idBuscado = 1;
+        Biblioteca buscado = libros.get(idBuscado);
+        System.out.println("Cantidad de ejemplares: " + buscado.getCantEjemplares() + " del id: " + buscado);
+
+        System.out.println("");
+        System.out.println("Ejercicio 4-B");
+
+        //Obtener todos los libros de un género dado.
+        String generoBuscado = "Psicologia";
+
+        List<Biblioteca>bibliotecas = new ArrayList<>();
+        bibliotecas.add(b1);
+        bibliotecas.add(b2);
+        bibliotecas.add(b3);
+        bibliotecas.add(b4);
+        bibliotecas.add(b5);
+
+        for (Biblioteca b : bibliotecas){
+            if(b.getGenero().equals(generoBuscado)){
+                System.out.println(b);
+            }
+        }
+
+        System.out.println("");
+        System.out.println("Ejercicio 4-C");
+        //Obtener todos los libros publicados entre dos años de publicación dados.
+        int fecha1 = 1997, fecha2 = 2020;
+
+        for (Biblioteca b : bibliotecas){
+            if (b.getAnioPublicacion()>=fecha1 && b.getAnioPublicacion()<=fecha2){
+                System.out.println(b);
+            }
+        }
+
+
 
 
     }

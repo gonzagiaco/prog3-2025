@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/Tp1/Tp1.iml" filepath="$PROJECT_DIR$/Tp1/Tp1.iml" />
       <module fileurl="file://$PROJECT_DIR$/Tp2 arboles/Tp2 arboles.iml" filepath="$PROJECT_DIR$/Tp2 arboles/Tp2 arboles.iml" />
       <module fileurl="file://$PROJECT_DIR$/Tp3 Hashing/Tp3 Hashing.iml" filepath="$PROJECT_DIR$/Tp3 Hashing/Tp3 Hashing.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Tp4 Grafo/Tp4 Grafo.iml" filepath="$PROJECT_DIR$/Tp4 Grafo/Tp4 Grafo.iml" />
     </modules>
   </component>
 </project>

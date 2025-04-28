@@ -21,7 +21,7 @@ public class Main {
         System.out.println(cliente.containsValue("Luciano"));
         */
     try{
-    /*    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate fecha1 = LocalDate.parse("19/05/1997", formatter);
         LocalDate fecha2 = LocalDate.parse("29/12/1999", formatter);
         LocalDate fecha3 = LocalDate.parse("29/12/1999", formatter);
@@ -96,7 +96,7 @@ public class Main {
             }
         }
 
-        */
+
 
 
     }catch (Exception exc){

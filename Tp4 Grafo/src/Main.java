@@ -5,6 +5,7 @@ public class Main {
         // Crear el grafo dirigido
         GrafoDirigido<String> grafo = new GrafoDirigido<>();
 
+
         // Agregar vértices
         grafo.agregarVertice(1);
         grafo.agregarVertice(2);
@@ -75,5 +76,43 @@ public class Main {
         // Verificar cantidad de vértices y arcos después de borrado
         System.out.println("Cantidad de vértices: " + grafo.cantidadVertices());
         System.out.println("Cantidad de arcos: " + grafo.cantidadArcos());
+
+
+        GrafoDirigido<String> grafo2 = new GrafoDirigido<>();
+
+        // Agregar vértices
+        grafo2.agregarVertice(1);
+        grafo2.agregarVertice(2);
+        grafo2.agregarVertice(3);
+        grafo2.agregarVertice(4);
+        grafo2.agregarVertice(5);
+        grafo2.agregarVertice(6);
+
+
+
+        // Agregar arcos
+        grafo2.agregarArco(1,2,"O");
+        grafo2.agregarArco(2, 3, "A");
+        grafo2.agregarArco(4, 5, "B");
+        grafo2.agregarArco(3, 6, "C");
+        grafo2.agregarArco(6,4,"D");
+
+
+        // Instanciar la clase Recorridos
+        Recorridos<String> recorridos = new Recorridos<>(grafo2);
+
+        // Ejecutar el DFS
+        recorridos.dfs();
+
+        // Mostrar los resultados del recorrido
+        System.out.println("Estado final de los vértices: " + recorridos.getVerticePintado());
+        if (recorridos.isCiclo()) {
+            System.out.println("Se encontró un ciclo en el grafo.");
+        } else {
+            System.out.println("No se encontró ningún ciclo.");
+        }
+
+        recorridos.ObtenerMayorCaminoEntre2Vertices(1,5);
+
     }
 }

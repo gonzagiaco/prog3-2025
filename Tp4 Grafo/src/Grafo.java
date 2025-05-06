@@ -42,5 +42,6 @@ import java.util.Iterator;
         public Iterator<Arco<T>> obtenerArcos(int verticeId);
 
 
+
     }
 

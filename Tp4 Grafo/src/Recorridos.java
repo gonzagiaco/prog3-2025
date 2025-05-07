@@ -84,6 +84,47 @@ public class Recorridos<T> {
     public HashMap<Integer, String> getVerticePintado() {
         return verticePintado;
     }
+
+    public void bfs() {
+        // Vaciar y pintar todos los vértices de blanco (NO_VISITADO)
+        Iterator<Integer> vertices = grafo.obtenerVertices();
+        verticePintado.clear();
+        while (vertices.hasNext()) {
+            verticePintado.put(vertices.next(), "BLANCO");
+        }
+
+        // Recorrer cada vértice
+        for (Integer vertice : verticePintado.keySet()) {
+            if (verticePintado.get(vertice).equals("BLANCO")) {
+                bfs_visit(vertice);
+            }
+        }
+    }
+
+    private void bfs_visit(Integer origen) {
+        Queue<Integer> fila = new LinkedList<>();
+        verticePintado.put(origen, "GRIS"); // GRIS puede representar VISITADO pero no terminado
+        fila.offer(origen);
+
+        while (!fila.isEmpty()) {
+            Integer actual = fila.poll();
+            System.out.println("Visitando vértice: " + actual);
+
+            Iterator<Integer> adyacentes = grafo.obtenerAdyacentes(actual);
+            while (adyacentes.hasNext()) {
+                Integer ady = adyacentes.next();
+                if (verticePintado.get(ady).equals("BLANCO")) {
+                    verticePintado.put(ady, "GRIS");
+                    fila.offer(ady);
+                }
+            }
+
+            verticePintado.put(actual, "NEGRO"); // NEGRO puede representar terminado
+            System.out.println("Vértice terminado: " + actual);
+        }
+    }
+
+
     public void ObtenerMayorCaminoEntre2Vertices(Integer origen, Integer destino){
         List<Integer> caminoActual = new ArrayList<>();
         List<Integer> mayorCamino = new ArrayList<>();

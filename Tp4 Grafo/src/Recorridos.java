@@ -81,9 +81,56 @@ public class Recorridos<T> {
         System.out.println("Vertice Terminado: "+vertice);
     }
 
-    public HashMap<Integer, String> getVerticePintado() {
-        return verticePintado;
+
+    public void dfs_ej4(Integer inicio, Integer destino){
+        List<Integer> caminoActual = new ArrayList<>();
+        List<Integer> mayorCamino = new ArrayList<>();
+        System.out.println(mayorCamino);
+        Iterator<Integer> vertices =grafo.obtenerVertices();
+
+        while (vertices.hasNext()){
+            /*este los va a pintar a todos de blanco , una vez que pinto todos de blanco , va a ir al dfs_visit*/
+            verticePintado.put(vertices.next(),"BLANCO");
+        }
+
+        for (Integer vertice : verticePintado.keySet()) {
+            String color = verticePintado.get(vertice);
+            if (color.equalsIgnoreCase("BLANCO")) {
+                dfs_visit_ej4(inicio, destino,caminoActual,mayorCamino);
+            }
+        }
+        System.out.println("Camino maasssssssssssssss largo entre " + inicio + " y " + destino + ": " + mayorCamino);
+
     }
+
+    private void dfs_visit_ej4(Integer inicio, Integer destino,List<Integer> caminoActual,List<Integer> mayorCamino){
+        System.out.println("Visitando Vertice: "+inicio);
+        verticePintado.put(inicio,"AMARILLO");
+
+        Iterator<Integer>adyacentes=grafo.obtenerAdyacentes(inicio);
+        if (inicio.equals(destino)){
+            if (caminoActual.size()>mayorCamino.size()){
+                mayorCamino.clear();
+                mayorCamino.addAll(caminoActual);
+            }
+        }
+        caminoActual.add(inicio);
+        while (adyacentes.hasNext()){
+
+            Integer actual= adyacentes.next();
+            if (verticePintado.get(actual).equalsIgnoreCase("BLANCO")){
+                dfs_visit_ej4(actual,destino,caminoActual,mayorCamino);
+            }else if (verticePintado.get(actual).equalsIgnoreCase("AMARILLO")) {
+                // Si encontramos un vértice "AMARILLO", hay un ciclo
+                ciclo = true;
+            }
+
+
+        }
+        verticePintado.put(inicio,"BLANCO");
+        caminoActual.remove(caminoActual.size()-1);
+    }
+
 
     public void bfs() {
         // Vaciar y pintar todos los vértices de blanco (NO_VISITADO)
@@ -167,6 +214,11 @@ public class Recorridos<T> {
         * y edspues remueve el size - 4  ( 1 2 3)
         * */
     }
+
+    public HashMap<Integer, String> getVerticePintado() {
+        return verticePintado;
+    }
+
 
 
 }

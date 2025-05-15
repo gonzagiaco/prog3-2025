@@ -114,5 +114,37 @@ public class Main {
 
         recorridos.ObtenerMayorCaminoEntre2Vertices(1,5);
 
+        System.out.println("-----------------------------------------------------------------------------");
+        System.out.println("EJERCICIO 5 ");
+        // Crear el grafo dirigido
+        GrafoDirigido<String> grafoEjercico5 = new GrafoDirigido<>();
+
+// Agregar vértices
+        grafoEjercico5.agregarVertice(1);
+        grafoEjercico5.agregarVertice(2);
+        grafoEjercico5.agregarVertice(3);
+        grafoEjercico5.agregarVertice(4);
+        grafoEjercico5.agregarVertice(5);
+
+// Agregar arcos
+        grafoEjercico5.agregarArco(1, 2, "A");
+        grafoEjercico5.agregarArco(1, 3, "B");
+        grafoEjercico5.agregarArco(2, 5, "C");
+        grafoEjercico5.agregarArco(4, 5, "D");
+        grafoEjercico5.agregarArco(5, 3, "E");
+
+
+        Recorridos<String> recorridosej5 = new Recorridos<>(grafoEjercico5);
+
+        recorridosej5.ejercicio5(3);
+
+        System.out.println("");
+        System.out.println("Ejercicio 6");
+
+        recorridosej5.ejercio6_bfs(1,5,grafoEjercico5);
+
+
     }
+
+
 }

@@ -1,4 +1,6 @@
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -89,13 +91,12 @@ public class Main {
         grafo2.agregarVertice(6);
 
 
-
         // Agregar arcos
-        grafo2.agregarArco(1,2,"O");
+        grafo2.agregarArco(1, 2, "O");
         grafo2.agregarArco(2, 3, "A");
         grafo2.agregarArco(4, 5, "B");
         grafo2.agregarArco(3, 6, "C");
-        grafo2.agregarArco(6,4,"D");
+        grafo2.agregarArco(6, 4, "D");
 
 
         // Instanciar la clase Recorridos
@@ -112,7 +113,7 @@ public class Main {
             System.out.println("No se encontró ningún ciclo.");
         }
 
-        recorridos.ObtenerMayorCaminoEntre2Vertices(1,5);
+        recorridos.ObtenerMayorCaminoEntre2Vertices(1, 5);
 
         System.out.println("-----------------------------------------------------------------------------");
         System.out.println("EJERCICIO 5 ");
@@ -141,10 +142,17 @@ public class Main {
         System.out.println("");
         System.out.println("Ejercicio 6");
 
-        recorridosej5.ejercio6_bfs(1,5,grafoEjercico5);
+        recorridosej5.ejercio6_bfs(1, 5, grafoEjercico5);
+
+
+        System.out.println("");
+        System.out.println("Ejercicio 7");
+
+        recorridosej5.buscarCaminoTandilBsAs(1,5);
 
 
     }
-
-
 }
+
+
+

@@ -318,7 +318,29 @@ public class Recorridos<T> {
             return new ArrayList<>();
         }
     }
+    public void buscarCaminoTandilBsAs(Integer origen, Integer destino){
+        ArrayList<Integer> caminoActual = new ArrayList<>();
+        caminoActual.add(origen);
 
+        if(origen.equals(destino)){
+
+            System.out.println(" un posible camino : " + caminoActual);
+
+        }else{
+            Iterator<Integer> adyacentes = grafo.obtenerAdyacentes(origen);
+            while(adyacentes.hasNext()){
+
+                Integer adyacente = adyacentes.next();
+
+                if(!caminoActual.contains(adyacente)){
+                    buscarCaminoTandilBsAs(adyacente, destino);
+                }
+            }
+        }
+
+        caminoActual.remove(origen);
+
+    }
 
 }
 

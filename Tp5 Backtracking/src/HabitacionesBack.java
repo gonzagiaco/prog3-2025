@@ -9,7 +9,7 @@ public class HabitacionesBack<T> {
     List<Integer> mayorCamino;
     HashSet<Integer> visitados;
 
-    public HabitacionesBack(Grafo<T>grafo) {
+    public HabitacionesBack(Grafo<T> grafo) {
         this.mayorCamino = new ArrayList<>();
         this.visitados = new HashSet<>();
         this.grafo = grafo;

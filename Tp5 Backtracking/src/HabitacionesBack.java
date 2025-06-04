@@ -15,8 +15,6 @@ public class HabitacionesBack<T> {
         this.grafo = grafo;
     }
 
-
-
     public List<Integer> conjuntoDeSalas(Integer origen, Integer destino) {
         visitados.clear();
         mayorCamino.clear();
@@ -58,10 +56,5 @@ public class HabitacionesBack<T> {
                 }
             }
         }
-
-
-
-
-
     }
 }

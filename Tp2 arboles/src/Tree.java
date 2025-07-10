@@ -24,6 +24,7 @@ public class Tree {
 
     private TreeNode root;
 
+
     public Tree() {
         this.root = null;
     }
@@ -34,6 +35,8 @@ public class Tree {
         else
             this.add(this.root,value);
     }
+
+    
 
     public int getHeight(){
         //en cada recursion bajamos un nivel
@@ -77,63 +80,43 @@ public class Tree {
 
         return delete(this.root, num);
     }
-/*
-    private boolean delete(TreeNode actual, Integer num){
 
-        if (actual == null){
-            return false;
-        }
-
-        if (num < actual.getValue()){
-            boolean deleted = delete(actual.getLeft(),num);
-
-            if (deleted && actual.getLeft() != null){
-                actual.setLeft(null);
-            }
-
-        }
-
-
-
-        return false;
-    }
-
-
- */
-
-    private TreeNode delete(TreeNode actual, Integer num){
-
-        if(actual == null){
+    private TreeNode delete(TreeNode actual, Integer num) {
+        if (actual == null) {
             return null;
         }
 
-        if(num < actual.getValue()){
+        if (num < actual.getValue()) {
             actual.setLeft(delete(actual.getLeft(), num));
-        }else if (num > actual.getValue()){
+        } else if (num > actual.getValue()) {
             actual.setRight(delete(actual.getRight(), num));
-        }else{
+        } else {
+            // Nodo encontrado
 
-            if(actual.getLeft() == null && actual.getRight() == null){ //Primer caso
+            // Caso 1: es hoja
+            if (actual.getLeft() == null && actual.getRight() == null) {
                 return null;
             }
 
-            else if(actual.getLeft() == null){ //segundo caso
+            // Caso 2: un solo hijo
+            else if (actual.getLeft() == null) {
                 return actual.getRight();
-            }
-            else if (actual.getRight() == null){
+            } else if (actual.getRight() == null) {
                 return actual.getLeft();
             }
 
-            else{
+            // Caso 3: dos hijos
+            else {
                 TreeNode tmp = NodoMasIzquierdo(actual.getRight());
                 actual.setValue(tmp.getValue());
-                actual.setRight(delete(tmp, actual.getValue()));
+                actual.setRight(delete(actual.getRight(), tmp.getValue()));
                 return actual;
             }
         }
 
         return actual;
     }
+
 
     public TreeNode NodoMasIzquierdo(TreeNode nodo) {
         if (nodo == null) return null;

@@ -13,6 +13,7 @@ public class Main {
         arbol.add(null);
 
 
+
         System.out.println("Altura del árbol: " + arbol.getHeight());
         System.out.println(arbol.getLongestBranch());
         System.out.println(arbol.getFrontera());
